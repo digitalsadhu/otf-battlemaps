@@ -48,4 +48,18 @@ export default class Token {
     );
     ctx.stroke();
   }
+
+  drawSvg(x, y, gridsize, padding) {
+    const radius = gridsize / 2;
+    const cx = x;
+    const cy = x + gridsize / 2;
+    return `<g>
+    <circle cx="${x * gridsize + padding - radius}" cy="${
+      y * gridsize + padding - radius
+    }" r="${radius}" fill="slategrey" />
+    <circle cx="${x * gridsize + padding - radius}" cy="${
+      y * gridsize + padding - radius
+    }" r="${radius - 4}" fill="${this.color}" />
+    </g>`;
+  }
 }

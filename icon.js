@@ -22,4 +22,8 @@ export default class Icon {
     };
     img.src = this.icon;
   }
+
+  drawSvg(x, y, gridsize) {
+    return `<image x="${x}" y="${y}" width="${gridsize}" height="${gridsize}" href="${this.icon}"/>`;
+  }
 }

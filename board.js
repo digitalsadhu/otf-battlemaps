@@ -1,6 +1,8 @@
 import canvas from "canvas";
 const { Image } = canvas;
 
+const PADDING = 15;
+
 export default class Board {
   constructor({
     width,
@@ -94,7 +96,10 @@ export default class Board {
       this.ctx.fillStyle = "slategray";
       this.ctx.textAlign = "center";
       this.ctx.textBaseline = "middle";
-      const character = num > 26 ? String.fromCharCode(num + 70) : String.fromCharCode(num + 64)
+      const character =
+        num > 26
+          ? String.fromCharCode(num + 70)
+          : String.fromCharCode(num + 64);
       this.ctx.fillText(
         character,
         this.padding + i - this.gridsize / 2,
@@ -134,5 +139,71 @@ export default class Board {
         item.draw(this.ctx, x, y, this.gridsize, this.padding);
       }
     }
+  }
+
+  drawSvg() {
+    const columns = this.width / this.gridsize;
+    const rows = this.height / this.gridsize;
+    const canvasWidth = this.width + 2 * PADDING;
+    const canvasHeight = this.height + 2 * PADDING;
+    let rowData = [];
+    for (let i = 0; i < rows; i++) {
+      rowData.push(
+        `<path d="M 0 ${i * this.gridsize} h${
+          this.width
+        }" stroke="black" stroke-width="0.2"/>`
+      );
+
+      const character =
+        i > 26 ? String.fromCharCode(i + 71) : String.fromCharCode(i + 65);
+      rowData.push(
+        `<text fill="slategray" x="-10" y="${
+          i * this.gridsize + this.gridsize / 2
+        }" font-size="10">${character}</text>`
+      );
+    }
+    rowData.push(
+      `<path d="M 0 ${rows * this.gridsize} h${
+        this.width
+      }" stroke="slategray" stroke-width="0.2"/>`
+    );
+    let columnData = [];
+    for (let i = 0; i < columns; i++) {
+      columnData.push(
+        `<path d="M ${i * this.gridsize} 0 v${
+          this.height
+        }" stroke="slategray" stroke-width="0.2"/>`
+      );
+      columnData.push(
+        `<text fill="slategray" x="${
+          i * this.gridsize + this.gridsize / 2
+        }" y="-4" font-size="10">${i + 1}</text>`
+      );
+    }
+    columnData.push(
+      `<path d="M ${columns * this.gridsize} 0 v${
+        this.height
+      }" stroke="slategray" stroke-width="0.2"/>`
+    );
+
+    const itemData = [];
+    for (const { x, y, item } of this) {
+      if (item) {
+        console.log(item);
+        itemData.push(item.drawSvg(x, y, this.gridsize, this.padding));
+      }
+    }
+
+    return `<svg viewBox="0 0 ${canvasWidth} ${canvasHeight}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <g id="grid">
+      ${rowData.join("\n")}
+      ${columnData.join("\n")}
+    </g>
+  </defs>
+
+  <use  href="#grid" x="${PADDING}" y="${PADDING}" />
+  ${itemData.join("\n")}
+</svg>`;
   }
 }
