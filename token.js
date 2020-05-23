@@ -50,16 +50,20 @@ export default class Token {
   }
 
   drawSvg(x, y, gridsize, padding) {
-    const radius = gridsize / 2;
-    const cx = x;
-    const cy = x + gridsize / 2;
+    const radius = gridsize * this.size;
+    const cx = (x - 1) * gridsize + padding + radius;
+    const cy = (y - 1) * gridsize + padding + radius;
+    const fontSize = gridsize / 4;
+    let text = "";
+    if (this.name) {
+      text = `<text x="${cx}" y="${cy}" font-size="${fontSize}" alignment-baseline="central" text-anchor="middle">${this.name}</text>`;
+    }
     return `<g>
-    <circle cx="${x * gridsize + padding - radius}" cy="${
-      y * gridsize + padding - radius
-    }" r="${radius}" fill="slategrey" />
-    <circle cx="${x * gridsize + padding - radius}" cy="${
-      y * gridsize + padding - radius
-    }" r="${radius - 4}" fill="${this.color}" />
+    <circle cx="${cx}" cy="${cy}" r="${radius}" fill="slategrey" />
+    <circle cx="${cx}" cy="${cy}" r="${(radius / 5) * 4}" fill="${
+      this.color
+    }" />
+    ${text}
     </g>`;
   }
 }

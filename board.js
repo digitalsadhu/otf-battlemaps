@@ -153,12 +153,11 @@ export default class Board {
           this.width
         }" stroke="black" stroke-width="0.2"/>`
       );
-
-
+      const y = i * this.gridsize + this.gridsize / 2;
       rowData.push(
-        `<text fill="slategray" x="-10" y="${
-          i * this.gridsize + this.gridsize / 2
-        }" font-size="10">${i + 1}</text>`
+        `<text fill="slategray" x="-10" y="${y}" font-size="10" alignment-baseline="central" text-anchor="middle">${
+          i + 1
+        }</text>`
       );
     }
     rowData.push(
@@ -175,10 +174,9 @@ export default class Board {
       );
       const character =
         i > 26 ? String.fromCharCode(i + 71) : String.fromCharCode(i + 65);
+      const x = i * this.gridsize + this.gridsize / 2;
       columnData.push(
-        `<text fill="slategray" x="${
-          i * this.gridsize + this.gridsize / 2
-        }" y="-4" font-size="10">${character}</text>`
+        `<text fill="slategray" x="${x}" y="-6" font-size="10" alignment-baseline="central" text-anchor="middle">${character}</text>`
       );
     }
     columnData.push(
