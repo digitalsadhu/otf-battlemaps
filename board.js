@@ -154,12 +154,11 @@ export default class Board {
         }" stroke="black" stroke-width="0.2"/>`
       );
 
-      const character =
-        i > 26 ? String.fromCharCode(i + 71) : String.fromCharCode(i + 65);
+
       rowData.push(
         `<text fill="slategray" x="-10" y="${
           i * this.gridsize + this.gridsize / 2
-        }" font-size="10">${character}</text>`
+        }" font-size="10">${i + 1}</text>`
       );
     }
     rowData.push(
@@ -174,10 +173,12 @@ export default class Board {
           this.height
         }" stroke="slategray" stroke-width="0.2"/>`
       );
+      const character =
+        i > 26 ? String.fromCharCode(i + 71) : String.fromCharCode(i + 65);
       columnData.push(
         `<text fill="slategray" x="${
           i * this.gridsize + this.gridsize / 2
-        }" y="-4" font-size="10">${i + 1}</text>`
+        }" y="-4" font-size="10">${character}</text>`
       );
     }
     columnData.push(
