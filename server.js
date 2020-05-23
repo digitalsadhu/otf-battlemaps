@@ -34,3 +34,7 @@ server.get("/*", (request, reply) => {
 });
 
 server.listen(process.env.PORT || 3000, "0.0.0.0");
+
+process.on('SIGTERM', async function onSigterm () {
+  await svgexport.cleanup()
+})
