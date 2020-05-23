@@ -189,7 +189,6 @@ export default class Board {
     const itemData = [];
     for (const { x, y, item } of this) {
       if (item) {
-        console.log(item);
         itemData.push(item.drawSvg(x, y, this.gridsize, this.padding));
       }
     }
