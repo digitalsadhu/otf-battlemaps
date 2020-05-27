@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import drawCanvas from "./draw-canvas.js";
-import svgexport from "svgexport";
+import svg2img from 'node-svg2img';
 import tempy from "tempy";
 import fs from "fs";
 
@@ -13,16 +13,10 @@ server.get("/*", (request, reply) => {
   path = path.replace(".svg", "");
   if (type == "png") {
     const svg = drawCanvas(path, 'svg');
-    const input = tempy.file({extension: 'svg'})
-    const output = tempy.file({extension: 'png'})
-    fs.writeFileSync(input, svg);
-    svgexport.render({input: [input] , output: [[output, "100%", "1000:1000"]], cwd: process.cwd()}, (err) => {
-      if (err) {
-        console.log(err)
-        return reply.code(500).send()
-      } else {
-        reply.type("image/png").send(fs.readFileSync(output));
-      }
+    svg2img(svg, { width: 1000, height: 1000 }, function (err, data) {
+      console.log(err)
+      fs.writeFileSync('dest.png', data);
+      reply.type("image/jpeg").send(data);
     });
   } else {
     const svg = drawCanvas(path, type);
