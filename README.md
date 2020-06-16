@@ -152,7 +152,7 @@ To draw a spell overlay, use the `*` character then the following shape codes: `
 ```
 http://otfbm.com/*c20rd5
 ```
-`*c` circle `20` diameter `r` _colour_ `d5` center co-ordinate
+`*c` circle `20` radius `r` _colour_ `d5` center co-ordinate
 
 ```
 http://otfbm.com/*t50ba5e5
@@ -167,7 +167,8 @@ http://otfbm.com/*l30,5ga1b2
 ```
 http://otfbm.com/*s30ca1b2
 ```
-`*s` square `30` size `c` _colour_ `a1` start co-ordinate `b2` direction co-ordinate
+`*s` square `30` size `c` _colour_ `a1` start co-ordinate `b2` _direction co-ordinate_\
+If the direction co-ordinate is not specified the start point is at the top left.
 
 ## Additional Options
 You can specify additional drawing options by providing the following parameters after a `@`.
