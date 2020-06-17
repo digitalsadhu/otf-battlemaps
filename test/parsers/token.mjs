@@ -53,7 +53,7 @@ test('parsing: position and 1 flag', (t) => {
 
 test('parsing: position and 2 flags', (t) => {
     const parser = new TokenParser();
-    const { x, y, color, size, name } = parser.parse('/D3rL');
+    const { x, y, color, size, name } = parser.parse('/D3lr');
     
     t.equal(x, 4);
     t.equal(y, 3);
@@ -89,7 +89,7 @@ test('parsing: position, 1 flag and name', (t) => {
 
 test('parsing: position, 2 flags and name', (t) => {
     const parser = new TokenParser();
-    const { x, y, color, size, name } = parser.parse('/D3rL-name');
+    const { x, y, color, size, name } = parser.parse('/D3Lr-name');
     
     t.equal(x, 4);
     t.equal(y, 3);
