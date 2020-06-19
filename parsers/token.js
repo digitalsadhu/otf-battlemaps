@@ -19,7 +19,7 @@ export default class TokenParser {
     if (str.length < 2) return false;
 
     // a string matching a token definition eg. d3rp-wizard
-    const reg = /^([a-zA-Z]{1,2}[0-9]{1,2})([tsmlhgTSMLHG]?)([a-zA-Z]{1,2})?(-([\w-\s]*))?$/;
+    const reg = /^([a-zA-Z]{1,2}[0-9]{1,2})([tsmlhgTSMLHG]*?)([a-zA-Z])?(-([\w-\s]*))?$/;
     if (reg.test(trimmed)) {
       const matches = trimmed.match(reg);
 

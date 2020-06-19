@@ -12,20 +12,6 @@ const singleColours = new Map([
   ["O", "orange"]
 ]);
 
-const doubleColours = new Map([
-  ["WH", "white"],
-  ["KB", "black"],
-  ["GY", "grey"],
-  ["RE", "firebrick"],
-  ["GN", "forestgreen"],
-  ["BL", "cornflowerblue"],
-  ["YE", "gold"],
-  ["PU", "darkviolet"],
-  ["CY", "deepskyblue"],
-  ["BN", "darkgoldenrod"],
-  ["OR", "orange"]
-]);
-
 export default class ColourParser {
   /**
    * parse a colour
@@ -34,12 +20,7 @@ export default class ColourParser {
   static parse(str) {
     if (str) {
       var upper = str.toUpperCase();
-      switch (upper.length) {
-        case 1:
-          return singleColours.get(upper) || "black";     
-        case 2:
-          return doubleColours.get(upper) || "black";
-      }
+      return singleColours.get(upper) || "black";  
     }
     return "black";
   }

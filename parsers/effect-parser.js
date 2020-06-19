@@ -18,7 +18,7 @@ export default class EffectParser {
     if (trimmed.charAt(0) !== '*')
       return false;
 
-    const reg = /\*([TLSRC])([tT]?)([0-9]*?)(\,[0-9]*?)?([a-zA-Z]{1,2})?(([A-Z]{1,2}[0-9]{1,2})+)/;
+    const reg = /\*([TLSRC])([tT]?)([0-9]*?)(\,[0-9]*?)?([a-zA-Z]?)(([A-Z]{1,2}[0-9]{1,2})+)/;
     if (!reg.test(trimmed)) 
       return false;
 
