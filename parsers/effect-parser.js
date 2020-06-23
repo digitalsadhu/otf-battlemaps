@@ -2,18 +2,20 @@ import CoordParser from "./coord-parser.js";
 import TriangleEffect from "../effects/triangle-effect.js";
 import CircleEffect from "../effects/circle-effect.js";
 import SquareEffect from "../effects/square-effect.js";
+import ColourParser from "./colour-parser.js";
 
 const effectShapes = new Map([
-  ['T', "triangle"], // aka cone
-  ['C', "circle"],
-  ['L', "line"],
-  ['S', "square"],
-  ['R', "rectangle"]
+  ["T", "triangle"], // aka cone
+  ["C", "circle"],
+  ["L", "line"],
+  ["S", "square"],
+  ["R", "rectangle"],
+  ["A", "arrow"]
 ]);
 
 const effectColours = new Map([
-  ['W', "white"],
-  ['L', "black"],
+  ["W", "white"],
+  ["L", "black"],
   ["G", "forestgreen"],
   ["R", "firebrick"],
   ["B", "cornflowerblue"],
@@ -29,7 +31,7 @@ export default class EffectParser {
     if (trimmed.charAt(0) !== '*')
       return false;
 
-    const reg = /\*([TLSRC])([0-9]*)(\,[0-9]*)?([A-Z])?(([A-Z][A-Z]?[0-9][0-9]?)+)/;
+    const reg = /\*([TLSRC])([0-9]*)(\,[0-9]*)?(GY|BK|BN|[WKEARGBYPCNO]|~[0-9A-f]{6}|~[0-9A-f]{3})?(([A-Z]{1,2}[0-9]{1,2})+)/;
     if (!reg.test(trimmed)) 
       return false;
 
@@ -37,7 +39,7 @@ export default class EffectParser {
     let shape = effectShapes.get(matches[1]);
     let size = matches[2];
     let size2 = 0;
-    let colour = effectColours.get(matches[4]) || "black";
+    let colour = ColourParser.parse(matches[4]);
     let coords = CoordParser.parseSet(matches[5]);
  
     switch (shape) {
