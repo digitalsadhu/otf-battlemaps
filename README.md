@@ -1,3 +1,9 @@
+# !!THIS REPO HAS MOVED!!
+
+* [app repo](https://github.com/otfbm/maps)
+* [documentation repo](https://github.com/otfbm/docs)
+
+
 # On The Fly Battle Maps
 
 * URL: http://otfbm.com
